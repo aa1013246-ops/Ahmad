@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment URL Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .generator-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .generator-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .url-output {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 14px;
+            margin-top: 10px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .copy-button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        .preview-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .preview-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .navigation {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .navigation a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">
+            <i class="fas fa-credit-card"></i>
+            Payment Page
+        </a>
+        <a href="generator.html">
+            <i class="fas fa-link"></i>
+            URL Generator
+        </a>
+    </div>
+
+    <div class="generator-container">
+        <div class="generator-card">
+            <div class="header">
+                <i class="fas fa-link"></i>
+                <h1>Payment URL Generator</h1>
+            </div>
+            
+            <form class="payment-form" id="generatorForm">
+                <div class="form-group">
+                    <label for="genCustomerName">
+                        <i class="fas fa-user"></i>
+                        Customer Name
+                    </label>
+                    <input type="text" id="genCustomerName" placeholder="Enter customer name" value="Tap" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genAmount">
+                        <i class="fas fa-dollar-sign"></i>
+                        Amount
+                    </label>
+                    <input type="number" id="genAmount" placeholder="0.00" step="0.01" min="0" value="2" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genDescription">
+                        <i class="fas fa-file-text"></i>
+                        Description
+                    </label>
+                    <input type="text" id="genDescription" placeholder="Payment description" value="invoice" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genId">
+                        <i class="fas fa-hashtag"></i>
+                        Invoice/Payment ID
+                    </label>
+                    <input type="text" id="genId" placeholder="Unique identifier" value="k8klwwmmw" required>
+                </div>
+
+                <button type="button" class="pay-button" onclick="generateURL()">
+                    <i class="fas fa-magic"></i>
+                    Generate Payment URL
+                </button>
+            </form>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <label>
+                    <i class="fas fa-link"></i>
+                    Generated Payment URL
+                </label>
+                <div class="url-output" id="generatedURL">
+                    Click "Generate Payment URL" to create a payment link
+                </div>
+                <button type="button" class="copy-button" id="copyButton" onclick="copyToClipboard()" style="display: none;">
+                    <i class="fas fa-copy"></i>
+                    Copy URL
+                </button>
+                <a href="#" class="preview-button" id="previewButton" style="display: none;" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    Preview Payment
+                </a>
+            </div>
+
+            <div class="security-info">
+                <i class="fas fa-info-circle"></i>
+                <span>The generated URL contains encoded payment information that will be automatically loaded on the payment page</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateURL() {
+            const customerName = document.getElementById('genCustomerName').value.trim();
+            const amount = parseFloat(document.getElementById('genAmount').value) || 0;
+            const description = document.getElementById('genDescription').value.trim();
+            const id = document.getElementById('genId').value.trim();
+
+            if (!customerName || !description || !id) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const data = {
+                customerName: customerName,
+                amount: amount,
+                description: description,
+                id: id
+            };
+
+            const encodedData = btoa(JSON.stringify(data));
+            const baseURL = window.location.origin + window.location.pathname.replace('generator.html', '');
+            const paymentURL = `${baseURL}index.html?data=${encodedData}`;
+
+            document.getElementById('generatedURL').textContent = paymentURL;
+            document.getElementById('copyButton').style.display = 'inline-flex';
+            document.getElementById('previewButton').style.display = 'inline-flex';
+            document.getElementById('previewButton').href = paymentURL;
+        }
+
+        function copyToClipboard() {
+            const urlText = document.getElementById('generatedURL').textContent;
+            navigator.clipboard.writeText(urlText).then(() => {
+                const button = document.getElementById('copyButton');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '#28a745';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy URL:', err);
+                alert('Failed to copy URL. Please copy manually.');
+            });
+        }
+
+        // Auto-generate URL when inputs change
+        document.querySelectorAll('#generatorForm input').forEach(input => {
+            input.addEventListener('input', () => {
+                if (document.getElementById('generatedURL').textContent !== 'Click "Generate Payment URL" to create a payment link') {
+                    generateURL();
+                }
+            });
+        });
+
+        // Generate initial URL
+        generateURL();
+    </script>
+</body>
+</html>
