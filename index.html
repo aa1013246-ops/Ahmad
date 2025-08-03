@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="navigation">
+        <a href="index.html">
+            <i class="fas fa-credit-card"></i>
+            Payment Page
+        </a>
+        <a href="generator.html">
+            <i class="fas fa-link"></i>
+            URL Generator
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="payment-card">
+            <div class="header">
+                <i class="fas fa-credit-card"></i>
+                <h1>Payment Gateway</h1>
+            </div>
+            
+            <div class="payment-info" id="paymentInfo">
+                <div class="info-item">
+                    <span class="label">Customer:</span>
+                    <span class="value" id="customerName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Amount:</span>
+                    <span class="value amount" id="amount">$0.00</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Description:</span>
+                    <span class="value" id="description">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Invoice ID:</span>
+                    <span class="value" id="invoiceId">-</span>
+                </div>
+            </div>
+
+            <form class="payment-form" id="paymentForm">
+                <div class="form-group">
+                    <label for="cardNumber">
+                        <i class="fas fa-credit-card"></i>
+                        Card Number
+                    </label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiryDate">
+                            <i class="fas fa-calendar"></i>
+                            Expiry Date
+                        </label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">
+                            <i class="fas fa-lock"></i>
+                            CVV
+                        </label>
+                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardName">
+                        <i class="fas fa-user"></i>
+                        Cardholder Name
+                    </label>
+                    <input type="text" id="cardName" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        Email Address
+                    </label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="security-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your payment information is secure and encrypted</span>
+                </div>
+
+                <button type="submit" class="pay-button">
+                    <i class="fas fa-lock"></i>
+                    Pay Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Payment Successful!</h2>
+            <p>Your payment has been processed successfully.</p>
+            <div class="transaction-details">
+                <div class="detail-item">
+                    <span>Transaction ID:</span>
+                    <span id="transactionId">-</span>
+                </div>
+                <div class="detail-item">
+                    <span>Amount:</span>
+                    <span id="paidAmount">-</span>
+                </div>
+                <div class="detail-item">
+                    <span>Date:</span>
+                    <span id="transactionDate">-</span>
+                </div>
+            </div>
+            <button class="close-button" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

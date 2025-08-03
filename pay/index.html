@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .loading-container {
+            text-align: center;
+            color: white;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h2>Processing Payment Request</h2>
+        <p>Please wait while we redirect you to the payment page...</p>
+    </div>
+
+    <script>
+        // Extract payment ID from URL path
+        function extractPaymentId() {
+            const path = window.location.pathname;
+            const segments = path.split('/');
+            return segments[segments.length - 1] || segments[segments.length - 2];
+        }
+
+        // Get URL parameters
+        function getUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                data: urlParams.get('data'),
+                paymentId: extractPaymentId()
+            };
+        }
+
+        // Redirect to main payment page
+        function redirectToPayment() {
+            const params = getUrlParams();
+            
+            if (params.data) {
+                // If data parameter exists, redirect with it
+                window.location.href = `../index.html?data=${params.data}`;
+            } else if (params.paymentId) {
+                // If only payment ID exists, create default data
+                const defaultData = {
+                    customerName: 'Guest User',
+                    amount: 0,
+                    description: 'Payment',
+                    id: params.paymentId
+                };
+                const encodedData = btoa(JSON.stringify(defaultData));
+                window.location.href = `../index.html?data=${encodedData}`;
+            } else {
+                // No parameters, redirect to default payment page
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Simulate loading time then redirect
+        setTimeout(redirectToPayment, 1500);
+    </script>
+</body>
+</html>
