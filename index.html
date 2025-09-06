@@ -1,131 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Gateway</title>
+    <title>الأعمال الذهبية للأستقدام - استقدام عمالة منزلية في الكويت</title>
+    <meta name="description" content="مكتب الأعمال الذهبية للأستقدام في الكويت. متخصصون في استقدام العمالة المنزلية من الفلبين، اثيوبيا، سيريلانكا، والهند. نوفر سائقين وطباخين.">
+    <meta name="keywords" content="استقدام, عمالة منزلية, الكويت, خدم, سائق, طباخ, الفلبين, اثيوبيا, سيريلانكا, الهند, الأعمال الذهبية">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navigation">
-        <a href="index.html">
-            <i class="fas fa-credit-card"></i>
-            Payment Page
-        </a>
-        <a href="generator.html">
-            <i class="fas fa-link"></i>
-            URL Generator
-        </a>
-    </div>
-
-    <div class="container">
-        <div class="payment-card">
-            <div class="header">
-                <i class="fas fa-credit-card"></i>
-                <h1>Payment Gateway</h1>
-            </div>
-            
-            <div class="payment-info" id="paymentInfo">
-                <div class="info-item">
-                    <span class="label">Customer:</span>
-                    <span class="value" id="customerName">-</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Amount:</span>
-                    <span class="value amount" id="amount">$0.00</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Description:</span>
-                    <span class="value" id="description">-</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Invoice ID:</span>
-                    <span class="value" id="invoiceId">-</span>
-                </div>
-            </div>
-
-            <form class="payment-form" id="paymentForm">
-                <div class="form-group">
-                    <label for="cardNumber">
-                        <i class="fas fa-credit-card"></i>
-                        Card Number
-                    </label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expiryDate">
-                            <i class="fas fa-calendar"></i>
-                            Expiry Date
-                        </label>
-                        <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cvv">
-                            <i class="fas fa-lock"></i>
-                            CVV
-                        </label>
-                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="cardName">
-                        <i class="fas fa-user"></i>
-                        Cardholder Name
-                    </label>
-                    <input type="text" id="cardName" placeholder="John Doe" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">
-                        <i class="fas fa-envelope"></i>
-                        Email Address
-                    </label>
-                    <input type="email" id="email" placeholder="john@example.com" required>
-                </div>
-
-                <div class="security-info">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Your payment information is secure and encrypted</span>
-                </div>
-
-                <button type="submit" class="pay-button">
-                    <i class="fas fa-lock"></i>
-                    Pay Now
-                </button>
-            </form>
+    <header>
+        <div class="container">
+            <h1>الأعمال الذهبية للإستقدام</h1>
+            <p>حلول متكاملة لاستقدام العمالة المنزلية في الكويت</p>
         </div>
-    </div>
+    </header>
 
-    <!-- Success Modal -->
-    <div class="modal" id="successModal">
-        <div class="modal-content">
-            <div class="success-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h2>Payment Successful!</h2>
-            <p>Your payment has been processed successfully.</p>
-            <div class="transaction-details">
-                <div class="detail-item">
-                    <span>Transaction ID:</span>
-                    <span id="transactionId">-</span>
-                </div>
-                <div class="detail-item">
-                    <span>Amount:</span>
-                    <span id="paidAmount">-</span>
-                </div>
-                <div class="detail-item">
-                    <span>Date:</span>
-                    <span id="transactionDate">-</span>
-                </div>
-            </div>
-            <button class="close-button" onclick="closeModal()">Close</button>
+    <nav>
+        <div class="container">
+            <a href="#services">خدماتنا</a>
+            <a href="#about">من نحن</a>
+            <a href="#contact">تواصل معنا</a>
         </div>
-    </div>
+    </nav>
 
-    <script src="script.js"></script>
+    <main class="container">
+        <section id="hero">
+            <h2>نوفر لكم أفضل العمالة المنزلية المدربة</h2>
+            <p>خبرة ومصداقية في تلبية احتياجاتكم.</p>
+            <a href="tel:+96566023227" class="cta-button">اتصل بنا الآن: 66023227</a>
+        </section>
+
+        <section id="services">
+            <h2>خدماتنا</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>الفلبين و اثيوبيا</h3>
+                    <p>استقدام عاملات من الفلبين واثيوبيا بخبرات متنوعة.</p>
+                </div>
+                <div class="service-card">
+                    <h3>سيريلانكا و الهند</h3>
+                    <p>استقدام عاملات من سيريلانكا والهند لتلبية كافة متطلبات الأسرة.</p>
+                </div>
+                <div class="service-card">
+                    <h3>السائق و الطباخ</h3>
+                    <p>نوفر سائقين وطباخين بمهارات عالية وخبرة موثوقة.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>من نحن</h2>
+            <p>الأعمال الذهبية للاستقدام تقدم حلول متنوعه تناسب جميع الاحتياجات تحت اشراف نخبة من المختصين من ذوي الخبرات في مجال الاستقدام.</p>
+
+            <h3>التراخيص</h3>
+            <p>الاعمال الذهبية للاستقدام مرخصة من قبل وزارة التجاره في دولة الكويت برقم ترخيص 363\\2022 ومن قبل الهيئة العامة للقوى العاملة برقم ترخيص 20220001617.</p>
+        </section>
+
+        <section id="contact">
+            <h2>تواصل معنا</h2>
+            <p>للاستفسار والطلبات، يمكنكم التواصل معنا عبر القنوات التالية:</p>
+            <ul>
+                <li><strong>رقم الهاتف:</strong> <a href="tel:+96566023227">66023227</a></li>
+                <li><strong>موقعنا على جوجل ماب:</strong> <a href="https://maps.app.goo.gl/c92hE7sp38ggkAEZA" target="_blank">اضغط هنا للوصول إلى موقعنا</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 الأعمال الذهبية للإستقدام. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 </body>
 </html>
